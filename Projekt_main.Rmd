@@ -1,0 +1,34 @@
+---
+title: "Projekt_main"
+output: html_document
+date: "2026-11-18"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(naniar)
+dane_athletes <- read.csv("olympic_athletes.csv")
+dane_hosts <- read.csv("olympic_hosts.csv")
+dane_medals <- read.csv("olympic_medals.csv")
+dane_results <- read.csv("olympic_results.csv")
+```
+
+# 1. Wprowadzenie
+# 2. Porządkowanie i czyszczenie danych
+## 2.1 Braki danych
+
+```{r}
+vis_miss(dane_athletes, warn_large_data = FALSE)
+vis_miss(dane_hosts, warn_large_data = FALSE)
+vis_miss(dane_medals, warn_large_data = FALSE)
+vis_miss(dane_results, warn_large_data = FALSE)
+
+```
+```{r}
+gg_miss_fct(dane_athletes, fct = first_game)
+gg_miss_fct(dane_athletes, fct = games_participations)
+
+```
+
+
