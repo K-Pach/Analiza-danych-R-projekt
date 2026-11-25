@@ -31,16 +31,40 @@ gg_miss_fct(kosz, fct = League)
 
 ```
 
-```{r}
-rules <- validator
 
+```{r}
+# tutaj usuniemy niepotrzebne kolumny
+kosz$weight <- NULL
+kosz$height <- NULL
+kosz <- kosz %>%
+  mutate(id = row_number(), .before = 1)
 ```
 
 ```{r}
-cf <- confront(dane, reguly, key = "id")
+attach(kosz)
+rules <- validator(
+  ORB + DRB == REB,
+  birth_year > 1940,
+  FGM <= FGA,
+  X3PM <= X3PA,
+  FTM <= FTA,
+  weight_kg > 0,
+  weight_kg < 200,
+  height_cm > 0,
+  height_cm < 300
+)
+detach(kosz)
 ```
 
 ```{r}
-dane_naprawione <- replace_errors(dane, reguly)
+cf <- confront(kosz, rules, key = "id")
+
+barplot(cf)
+```
+
+```{r}
+#dane_naprawione <- replace_errors(dane, reguly)
+# sprawdzenie sumy braków
+# sum(is.na(kosz)) a w drugim wierszu zamiast kosz naprawione dane
 ```
 
