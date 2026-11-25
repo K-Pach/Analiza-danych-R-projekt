@@ -12,10 +12,7 @@ library(validate)
 library(validatetools)
 library(dcmodify)
 library(errorlocate)
-dane_athletes <- read.csv("olympic_athletes.csv")
-dane_hosts <- read.csv("olympic_hosts.csv")
-dane_medals <- read.csv("olympic_medals.csv")
-dane_results <- read.csv("olympic_results.csv")
+kosz <- read.csv("players_stats_by_season_full_details.csv")
 ```
 
 # 1. Wprowadzenie
@@ -23,15 +20,13 @@ dane_results <- read.csv("olympic_results.csv")
 ## 2.1 Braki danych
 
 ```{r}
-vis_miss(dane_athletes, warn_large_data = FALSE)
-vis_miss(dane_hosts, warn_large_data = FALSE)
-vis_miss(dane_medals, warn_large_data = FALSE)
-vis_miss(dane_results, warn_large_data = FALSE)
+vis_miss(kosz, warn_large_data = FALSE)
+
 
 ```
 ```{r}
-gg_miss_fct(dane_athletes, fct = first_game)
-gg_miss_fct(dane_athletes, fct = games_participations)
+gg_miss_fct(kosz, fct = League)
+
 
 ```
 
@@ -40,4 +35,11 @@ rules <- validator
 
 ```
 
+```{r}
+cf <- confront(dane, reguly, key = "id")
+```
+
+```{r}
+dane_naprawione <- replace_errors(dane, reguly)
+```
 
