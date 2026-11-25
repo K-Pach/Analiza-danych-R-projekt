@@ -8,6 +8,10 @@ date: "2026-11-18"
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(naniar)
+library(validate)
+library(validatetools)
+library(dcmodify)
+library(errorlocate)
 dane_athletes <- read.csv("olympic_athletes.csv")
 dane_hosts <- read.csv("olympic_hosts.csv")
 dane_medals <- read.csv("olympic_medals.csv")
@@ -28,6 +32,11 @@ vis_miss(dane_results, warn_large_data = FALSE)
 ```{r}
 gg_miss_fct(dane_athletes, fct = first_game)
 gg_miss_fct(dane_athletes, fct = games_participations)
+
+```
+
+```{r}
+rules <- validator
 
 ```
 
