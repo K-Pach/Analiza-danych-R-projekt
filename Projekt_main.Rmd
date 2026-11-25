@@ -24,6 +24,7 @@ vis_miss(kosz, warn_large_data = FALSE)
 
 
 ```
+
 ```{r}
 gg_miss_fct(kosz, fct = League)
 
